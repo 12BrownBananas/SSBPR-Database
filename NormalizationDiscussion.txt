@@ -1,0 +1,27 @@
+Excepting the player table, each table in this database has been normalized to BCNF-- that is, each table features no transitive dependency (no non-primary fields that determine other fields) as well as a single superkey. In more detail, each table's dependencies can be expressed as the following: 
+
+venue (BCNF):
+vname -> city
+
+tournament (BCNF):
+tournament_id -> tname, vname, tdate, entrants
+
+tournament_character (BCNF):
+cname -> ranking
+
+touranment_set (BCNF):
+set_id -> tournament_id, p1_tag, p2_tag, p1_score, p2_score, p1_cname, p2_cname, winner
+
+player (2NF):
+player_id -> tag, ciy, wins, losses, points
+tag -> city, wins, losses, points
+
+team (BCNF):
+tname -> p1_tag, p2_tag, wins, losses, points
+
+doubles_set (BCNF):
+dset_id -> tournament_id, t1_name, t2_name, t1_score, t2_score, winner
+
+Excepting player, which features redundancy shared between the player_id and tag fields, every field in, for instance, tournament_set is individually determined by the unique primary key and does not determine any other field in the relation. 
+
+To normalize player without losing any data, the simplest solution would be to just remove player_id and replace it with tag as the primary key. Without removing any fields, we could subdivide the table into two tables: one with only player_id and tag and another with tag, city, wins, losses, and points. Both of these strategies would result in relations in BCNF.
