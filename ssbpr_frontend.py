@@ -265,7 +265,7 @@ def updatePlayer():
             cursor.execute("commit")
     mainMenu()
 
-def reportSet(): #Currently this one is pretty poorly-designed. Can't think of a way to break out of the entire function on "!exit!" input.
+def reportSet():
     print()
     print("- Report Set")
     print("Enter '!exit!' at any time to back out.")
